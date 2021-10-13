@@ -10,7 +10,7 @@ The arguments consist of:
 
 This program should generate a parser for the arguments. These arguments are delimited by spaces or tabs for instance that separate them as distinct values.
 
-This program also should generate a schema which describes the expected arguments. It specifies the number and types of flags and value sthe progam expects.
+This program also should generate a schema which describes the expected arguments. It specifies the number and types of flags and values the program expects.
 
 After the schema has been specified, the program passes the argument to the parser. This parser verifies that the arguments passed will correctly map to the schema.
 
