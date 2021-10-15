@@ -4,13 +4,24 @@ from src.parser import Parser
 
 
 class MyTestCase(unittest.TestCase):
+    parser: Parser
+
+    def setUp(self) -> None:
+        self.parser: Parser = Parser()
+
+        # Defining the schema in the setup
+        schema = [
+            ('Log', r'-[l]', 'boolean'),
+            ('Port', r'-[p]', 'integer'),
+            ('Directory', r'-[d]', 'string'),
+        ]
+
+        self.parser.define_schema(schema)
 
     def test_parse_arguments(self):
         arguments: str = "-l -p 8080 -d /usr/var"
 
-        parser: Parser = Parser()
-
-        flags = parser.parse_flags(arguments)
+        flags = self.parser.parse_flags(arguments)
 
         print(flags)
 
@@ -18,12 +29,21 @@ class MyTestCase(unittest.TestCase):
 
         self.assertEqual(flags, expected_args)
 
+    def test_parse_argument_return_types(self):
+        arguments: str = "-l -p 8080 -d /usr/var"
+
+        flags_with_return_types = self.parser.parse_flag_return_types(arguments)
+
+        print(flags_with_return_types)
+
+        expected_args = [('Log', 'boolean'), ('Port', 'integer'), ('Directory', 'string')]
+
+        self.assertEqual(flags_with_return_types, expected_args)
+
     def test_parse_values(self):
         arguments: str = "-l -p 8080 -d /usr/var"
 
-        parser: Parser = Parser()
-
-        values = parser.parse_values(arguments)
+        values = self.parser.parse_values(arguments)
 
         print(values)
 
@@ -37,9 +57,9 @@ class MyTestCase(unittest.TestCase):
         # in this test, it should return false for logging
         # this return is because the -l flag is not used
 
-        parser: Parser = Parser()
-
-        parsed_args_values = parser.parse_argument()
+        parsed_args_values = self.parser.parse_argument(arguments)
+        for token in parsed_args_values:
+            print(token)
 
         expected_values = ["LOGGING:FALSE", "PORT:8080", "DIRECTORY:/usr/var"]
 
