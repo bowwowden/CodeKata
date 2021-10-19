@@ -8,7 +8,7 @@ The arguments consist of:
 * Flags: one character, preceded by a minus sign -
 * Values: arguments to be passed to flags, coming in amounts of 0 or 1 values. 
 
-This program should generate a parser for the arguments. These arguments are delimited by spaces or tabs for instance that separate them as distinct values.
+This program should parse for the arguments. These arguments are delimited by spaces or tabs for instance that separate them as distinct values.
 
 This program also should define a schema which describes the expected arguments. It specifies the number and types of flags and values the program expects.
 
